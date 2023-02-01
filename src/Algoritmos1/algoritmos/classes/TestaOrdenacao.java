@@ -20,26 +20,27 @@ public class TestaOrdenacao {
     }
 
     private static void novoSort(Produtos[] produtos, int qtdDeElementos) {
-        for (int atual = 0; atual < qtdDeElementos; atual++) {
+        for (int atual = 1; atual < qtdDeElementos; atual++) {
             int analise = atual;
             while (analise > 0 && produtos[analise].getPreco() < produtos[analise - 1].getPreco()) {
-                Produtos produtoAnalise = produtos[analise];
-                Produtos produtoAnaliseMenos1 = produtos[analise - 1];
-                produtos[analise] = produtoAnaliseMenos1;
-                produtos[analise -1] = produtoAnalise;
+                troca(produtos, analise, analise - 1);
                 analise--;
             }
         }
 
     }
 
+    private static void troca(Produtos[] produtos, int primeiro, int segundo) {
+        Produtos primeiroProduto = produtos[primeiro];
+        Produtos segundoProduto = produtos[segundo];
+        produtos[primeiro] = segundoProduto;
+        produtos[segundo] = primeiroProduto;
+    }
+
     private static void selectionSort(Produtos[] produtos, int qtdDeElementos) {
         for (int atual = 0; atual < qtdDeElementos; atual++) {
             int menor = buscaMenor(produtos, atual, qtdDeElementos - 1);
-            Produtos produtoAtual = produtos[atual];
-            Produtos produtoMenor = produtos[menor];
-            produtos[atual] = produtoMenor;
-            produtos[menor] = produtoAtual;
+            troca(produtos, atual, menor);
         }
     }
 
